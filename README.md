@@ -1,29 +1,32 @@
 # UART Communication in Verilog
 
-## Overview
-A UART communication module designed and implemented using Verilog HDL and tested in Xilinx Vivado.
+A UART (Universal Asynchronous Receiver-Transmitter) communication system designed and implemented using Verilog HDL. The project includes a UART transmitter, receiver, top-level integration, and simulation verification using Xilinx Vivado.
 
-## Features
-- UART Transmitter (TX)
-- UART Receiver (RX)
-- Configurable baud rate
-- Start and stop bit handling
-- Serial data transmission and reception
-- Verilog testbench for functional verification
+## Project Overview
 
-## Tools Used
-- Verilog HDL
-- Xilinx Vivado
-- Simulation / Waveform Analysis
+This project implements serial communication between a UART transmitter and receiver.
 
-## Project Structure
-- `rtl/` – Verilog design modules
-- `testbench/` – Verification files
-- `constraints/` – FPGA pin constraints
-- `simulation/` – Simulation results
+The transmitter converts 8-bit parallel data into a serial UART data stream, while the receiver samples the incoming serial signal and reconstructs the original 8-bit data.
 
-## Simulation Result
-Add your UART waveform screenshot here.
+### UART Configuration
 
-## Author
-Prathmesh Thanekar
+| Parameter | Value |
+|---|---:|
+| FPGA Clock Frequency | 100 MHz |
+| Baud Rate | 9600 |
+| Data Bits | 8 |
+| Start Bits | 1 |
+| Stop Bits | 1 |
+| Parity | None |
+| Data Order | LSB First |
+
+## UART Frame Format
+
+Each transmitted byte consists of 10 bits:
+
+```text
+        Start      Data Bits                         Stop
+          ↓       ↓                                  ↓
+         ┌───┬───────┬───────────────────────────────┐
+         │ 0 │ D0-D7 │               1               │
+         └───┴───────┴───────────────────────────────┘
